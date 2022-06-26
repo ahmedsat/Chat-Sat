@@ -3,6 +3,10 @@ require("express-async-errors");
 
 const express = require("express");
 
+const connectDB = require("./DB/connectDB");
+
+const { ErrorHandler } = require("./middlewares");
+
 const authRouter = require("./routes/auth");
 
 const app = express();
@@ -14,13 +18,17 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // main routes
-app.use("/", (req, res) => {
+app.use("/api/v1/auth", authRouter);
+
+app.get("/", (req, res) => {
   res.send("welcome to my api");
 });
-app.use("/api/v1/users", authRouter);
+
+// app.use(ErrorHandler);
 
 const startServer = async () => {
   try {
+    await connectDB();
     app.listen(port, () => {
       console.log(`App listen to port : ${port}`);
     });

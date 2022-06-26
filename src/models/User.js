@@ -1,3 +1,4 @@
+require("dotenv").config();
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -29,6 +30,11 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: [true, "Password is required"],
       minlength: 6,
+    },
+    loginExpires: {
+      type: String,
+      default: "30d",
+      match: [/^[0-9]+[dhms]$/, "Login expires must be a valid duration"],
     },
   },
   { timestamps: true }
