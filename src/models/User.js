@@ -39,7 +39,7 @@ UserSchema.pre("save", async function () {
   this.password = await bcrypt.hash(this.password, genSalt);
 });
 
-UserSchema.methods.CreatJWT = function () {
+UserSchema.methods.getToken = function () {
   const token = jwt.sign(
     { id: this._id, name: this.name },
     process.env.JWT_SECRET,
