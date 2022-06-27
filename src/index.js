@@ -7,6 +7,8 @@ const connectDB = require("./DB/connectDB");
 
 const { ErrorHandler } = require("./middlewares");
 
+// require routes
+const adminRoutes = require("./routes/admin");
 const authRouter = require("./routes/auth");
 
 const app = express();
@@ -18,6 +20,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // main routes
+
+app.use("/api/v1/admin", adminRoutes);
 app.use("/api/v1/auth", authRouter);
 
 app.get("/", (req, res) => {
