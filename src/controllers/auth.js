@@ -12,7 +12,7 @@ const register = async function (req, res) {
 
   token = await user.getToken();
 
-  res.status(StatusCodes.OK).json({ username, token });
+  res.status(StatusCodes.OK).json({ username: user.username, token });
 };
 
 const login = async function (req, res) {

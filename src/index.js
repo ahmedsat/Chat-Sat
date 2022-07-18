@@ -1,3 +1,16 @@
+/**
+ * TODO:
+ * [ ] find a working http clint [thunder clint, postman, rest clint, ...]
+ * [ ] test for what done and what to do
+ * [ ] put a schedule
+ * ////////////////////////////////////////
+ * [x] api up and running
+ * [ ] user routes
+ * [ ] admin routes
+ * [ ] messages routes
+ * [ ] rooms routes
+ */
+
 require("dotenv").config();
 require("express-async-errors");
 
@@ -21,14 +34,14 @@ app.use(express.urlencoded({ extended: true }));
 
 // main routes
 
-app.use("/api/v1/admin", adminRoutes);
 app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/admin", adminRoutes);
 
 app.get("/", (req, res) => {
   res.send("welcome to my api");
 });
 
-// app.use(ErrorHandler);
+app.use(ErrorHandler);
 
 const startServer = async () => {
   try {
